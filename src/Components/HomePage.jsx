@@ -28,10 +28,11 @@ const HomePage = () => {
           </p>
           <GoogleLogin
             clientId="220997474315-j1rbq2ijrsrad2qivt7o3qv3ld72mnes.apps.googleusercontent.com"
-            render={({ onClick, disabled }) => {
+            buttonText="Login"
+            render={(renderProps) => {
               <button
-                onClick={onClick}
-                disabled={disabled}
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
                 className="login-button"
               >
                 Login with Google
@@ -40,7 +41,7 @@ const HomePage = () => {
             onSuccess={login}
             onFailure={login}
             isSignedIn={true}
-            cookiePolicy="single-host-origin"
+            cookiePolicy="single_host_origin"
           />
         </div>
       )}
