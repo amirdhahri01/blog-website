@@ -26,22 +26,7 @@ const HomePage = () => {
             We provide high quality online resource for reading blogs. Just sign
             up and start reading quality blogs.
           </p>
-          <GoogleLogin
-            buttonText="Login"
-            render={(renderProps) => {
-              <button
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                className="login-button"
-              >
-                Login with Google
-              </button>;
-            }}
-            onSuccess={login}
-            onFailure={login}
-            isSignedIn={true}
-            cookiePolicy="single_host_origin"
-          />
+          <GoogleLogin onSuccess={login} onError={login} />
         </div>
       )}
     </div>
