@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSignedIn,
@@ -27,7 +27,6 @@ const HomePage = () => {
             up and start reading quality blogs.
           </p>
           <GoogleLogin
-            clientId="220997474315-j1rbq2ijrsrad2qivt7o3qv3ld72mnes.apps.googleusercontent.com"
             buttonText="Login"
             render={(renderProps) => {
               <button
