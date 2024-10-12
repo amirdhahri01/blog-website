@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Avatar } from "@mui/material";
-import { GoogleLogout } from "react-google-login";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectSignedIn,
@@ -11,6 +10,7 @@ import {
 } from "../Features/userSlice";
 
 import "../Styles/navbar.css";
+import { GoogleLogout } from "react-google-login";
 
 const NavBar = () => {
   const [inputValue, setInputValue] = useState("tech");
@@ -28,8 +28,9 @@ const NavBar = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(setInputValue());
+    dispatch(setInputValue(inputValue));
   };
+
   return (
     <div className="navbar">
       <h1 className="navbar-header">BlogMania 💬</h1>
