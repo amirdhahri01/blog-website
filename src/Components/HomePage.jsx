@@ -1,4 +1,5 @@
 import React from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSignedIn,
@@ -6,24 +7,15 @@ import {
   setUserData,
 } from "../Features/userSlice";
 import "../Styles/home.css";
-import { useGoogleLogin } from "react-google-login";
 
 const HomePage = () => {
   const isSignedIn = useSelector(selectSignedIn);
   const dispatch = useDispatch();
-  const handleLogin = (response) => {
+  const login = (response) => {
     console.log(response);
     dispatch(setSignedIn(true));
     dispatch(setUserData(response.profileObj));
   };
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      handleLogin(tokenResponse);
-    },
-    onerror: (tokenResponse) => {
-      handleLogin(tokenResponse);
-    },
-  });
   return (
     <div className="home-page" style={{ display: isSignedIn ? "none" : "" }}>
       {!isSignedIn && (
@@ -34,8 +26,7 @@ const HomePage = () => {
             We provide high quality online resource for reading blogs. Just sign
             up and start reading quality blogs.
           </p>
-          import {useGoogleLogin} from '@react-oauth/google';
-          <button onClick={() => login()}>Sign in with Google 🚀</button>;
+          <GoogleLogin onSuccess={login} onError={login} />
         </div>
       )}
     </div>
