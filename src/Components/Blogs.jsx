@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchInput, setBlogData } from "../Features/userSlice";
+import { selectSearchInput, setBlogData } from "../Features/userSlice";
 
 import "../Styles/blogs.css";
 
 const Blogs = () => {
-  const searchInput = useSelector(setSearchInput);
+  const searchInput = useSelector(selectSearchInput);
 
   const blog_url = `https://gnews.io/api/v4/search?q=${searchInput}&lang=en&country=us&max=10&apikey=f9ea3008fa573b887c4b17b5e1a6c006`;
 
@@ -34,8 +34,8 @@ const Blogs = () => {
       <h1 className="blog-page-header">Blogs</h1>
       {loading ? <h1 className="loading">Loading...</h1> : ""}
       <div className="blogs">
-        {blogs?.articles?.map((blog) => (
-          <a className="blog" target="_blank" href={blog.url}>
+        {blogs?.articles?.map((blog, i) => (
+          <a className="blog" target="_blank" href={blog.url} key={i}>
             <img src={blog.image} />
             <div>
               <h3 className="sourceName">
