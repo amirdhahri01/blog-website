@@ -10,7 +10,7 @@ import {
 } from "../Features/userSlice";
 
 import "../Styles/navbar.css";
-import { GoogleLogout } from "react-google-login";
+import { googleLogout } from "@react-oauth/google";
 
 const NavBar = () => {
   const [inputValue, setInputValue] = useState("tech");
@@ -22,13 +22,14 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const logout = (reponse) => {
-    dispatch(setSignedIn(true));
-    dispatch(setSearchInput(inputValue));
+    googleLogout();
+    dispatch(setSignedIn(false));
+    dispatch(setUserData(null));
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(setInputValue(inputValue));
+    dispatch(setSearchInput(inputValue));
   };
 
   return (
@@ -56,19 +57,9 @@ const NavBar = () => {
             alt={userData?.name}
           />
           <h1 className="signedIn">{userData?.givenName}</h1>
-          <GoogleLogout
-            buttonText="Logout 😦"
-            render={(renderProps) => (
-              <button
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                className="logout-button"
-              >
-                Logout 😦
-              </button>
-            )}
-            onLogoutSuccess={logout}
-          />
+          <button onClick={logout} className="logout-button">
+            Logout 😦
+          </button>
         </div>
       ) : (
         <h1 className="notSignedIn">User not available 😞</h1>
